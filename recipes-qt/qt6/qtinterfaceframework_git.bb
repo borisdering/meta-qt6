@@ -23,18 +23,18 @@ REFERENCE_API ?= "1"
 SIMULATION_SUPPORT ?= "1"
 include ${@bb.utils.contains('SIMULATION_SUPPORT', '1', 'qtinterfaceframework.inc', '', d)}
 
-FILES:${PN}-dev += " \
+FILES_${PN}-dev += " \
     ${QT6_INSTALL_DATADIR}/ifcodegen-templates \
     "
 
 PACKAGES =+ "${PN}-refapi-media"
-FILES:${PN}-refapi-media = "\
+FILES_${PN}-refapi-media = "\
     ${QT6_INSTALL_LIBDIR}/libQt6IfMedia.so.* \
     ${QT6_INSTALL_LIBDIR}/qml/QtInterfaceFramework/Media \
     "
 
 PACKAGES =+ "${PN}-refapi-vehiclefuntions"
-FILES:${PN}-refapi-vehiclefuntions = "\
+FILES_${PN}-refapi-vehiclefuntions = "\
     ${QT6_INSTALL_LIBDIR}/libQt6IfVehicleFunctions.so.* \
     ${QT6_INSTALL_LIBDIR}/qml/QtInterfaceFramework/VehicleFunctions \
     "
@@ -66,8 +66,8 @@ PACKAGECONFIG[no-vehiclefuntions-simulation] = "-DFEATURE_vehiclefunctions_qtro_
 
 PACKAGECONFIG_SIMULATION ?= "${@bb.utils.contains('SIMULATION_SUPPORT', '1', '', 'no-media-simulation no-vehiclefuntions-simulation', d)}"
 
-PACKAGECONFIG:class-native ??= "interfaceframework ifcodegen host-tools-only remoteobjects"
-PACKAGECONFIG:class-nativesdk ??= "${PACKAGECONFIG:class-native}"
+PACKAGECONFIG_class-native ??= "interfaceframework ifcodegen host-tools-only remoteobjects"
+PACKAGECONFIG_class-nativesdk ??= "${PACKAGECONFIG:class-native}"
 
 BBCLASSEXTEND = "native nativesdk"
 

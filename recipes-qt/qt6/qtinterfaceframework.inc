@@ -7,7 +7,7 @@ SRC_URI += " \
     file://simulation-server.conf \
 "
 
-do_install:append:class-target() {
+do_install_append_class-target() {
     install -m 0755 -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/ifmedia-simulation-server.service ${D}${systemd_unitdir}/system/
     install -m 0644 ${WORKDIR}/ifvehiclefunctions-simulation-server.service ${D}${systemd_unitdir}/system/
@@ -18,14 +18,14 @@ do_install:append:class-target() {
 }
 
 SYSTEMD_PACKAGES = "${PN}-simulation"
-SYSTEMD_SERVICE:${PN}-simulation = " \
+SYSTEMD_SERVICE_${PN}-simulation = " \
     ifmedia-simulation-server.service \
     ifvehiclefunctions-simulation-server.service \
     if-services.target \
     "
 
 PACKAGES =+ "${PN}-simulation"
-FILES:${PN}-simulation = " \
+FILES_${PN}-simulation = " \
     ${QT6_INSTALL_BINDIR}/ifmedia-simulation-server \
     ${QT6_INSTALL_BINDIR}/ifvehiclefunctions-simulation-server \
     ${QT6_INSTALL_PLUGINSDIR}/interfaceframework/ \

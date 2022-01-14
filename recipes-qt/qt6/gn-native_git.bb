@@ -9,4 +9,4 @@ cmake_do_install() {
     eval DESTDIR='${D}' ${CMAKE_VERBOSE} cmake --install '${B}'
 }
 
-INSANE_SKIP:${PN} += "already-stripped"
+INSANE_SKIP_${PN} += "already-stripped"

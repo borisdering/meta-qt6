@@ -6,11 +6,11 @@ EXTRA_OECMAKE += "\
     -DQT_CMAKE_DEBUG_EXTEND_TARGET=ON \
     -DQT_BUILD_INTERNALS_NO_FORCE_SET_INSTALL_PREFIX=ON \
 "
-EXTRA_OECMAKE:append:class-target = "\
+EXTRA_OECMAKE_append_class-target = "\
     -DQT_HOST_PATH:PATH=${RECIPE_SYSROOT_NATIVE}/${prefix_native}/ \
     -DQT_BUILD_TOOLS_WHEN_CROSSCOMPILING=ON \
 "
-EXTRA_OECMAKE:append:class-nativesdk = "\
+EXTRA_OECMAKE_append_class-nativesdk = "\
     -DQT_HOST_PATH:PATH=${RECIPE_SYSROOT_NATIVE}/${prefix_native}/ \
     -DQT_BUILD_TOOLS_WHEN_CROSSCOMPILING=ON \
 "
@@ -33,7 +33,7 @@ EXTRA_OECMAKE += "\
     -DINSTALL_MKSPECSDIR:PATH=${@os.path.relpath(d.getVar('QT6_INSTALL_MKSPECSDIR'), d.getVar('prefix') + '/')} \
 "
 
-do_install:append() {
+do_install_append() {
     # Replace host paths with qmake built-in properties QTBUG-84725
     find ${D} \( -name "*.pri" -or -name "*.prl" \) -exec \
         sed -i -e 's|${STAGING_DIR_NATIVE}|$$[QT_HOST_PREFIX/get]|g' \

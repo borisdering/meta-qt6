@@ -21,8 +21,8 @@ PACKAGECONFIG ?= "\
     wayland-server \
     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xcomposite-glx', '', d)} \
 "
-PACKAGECONFIG:class-native ?= ""
-PACKAGECONFIG:class-nativesdk ?= ""
+PACKAGECONFIG_class-native ?= ""
+PACKAGECONFIG_class-nativesdk ?= ""
 
 PACKAGECONFIG[wayland-client] = "-DFEATURE_wayland_client=ON,-DFEATURE_wayland_client=OFF,"
 PACKAGECONFIG[wayland-server] = "-DFEATURE_wayland_server=ON,-DFEATURE_wayland_server=OFF,"

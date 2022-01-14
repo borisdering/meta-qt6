@@ -26,11 +26,11 @@ DEPENDS += "\
     freetype \
     pcre2 \
 "
-DEPENDS:remove:class-native = "qtbase-native"
-RDEPENDS_${PN}:remove:class-native = "libssl-native"
+DEPENDS_remove_class-native = "qtbase-native"
+RDEPENDS_${PN}_remove_class-native = "libssl-native"
 
-PACKAGECONFIG:class-native ?= "gui widgets png dbus no-opengl openssl"
-PACKAGECONFIG:class-nativesdk ?= "${PACKAGECONFIG:class-native}"
+PACKAGECONFIG_class-native ?= "gui widgets png dbus no-opengl openssl"
+PACKAGECONFIG_class-nativesdk ?= "${PACKAGECONFIG:class-native}"
 PACKAGECONFIG ?= "\
     ${PACKAGECONFIG_DEFAULT} \
     ${PACKAGECONFIG_GRAPHICS} \
@@ -58,7 +58,7 @@ PACKAGECONFIG_DEFAULT ?= "accessibility dbus udev gui widgets icu openssl  \
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'openembedded-layer', 'zstd', '', d)} \
 "
 
-PACKAGECONFIG:remove:mingw32 = "openssl"
+PACKAGECONFIG_remove_mingw32 = "openssl"
 
 # Build type: Debug, Release, MinSizeRel, RelWithDebInfo
 BUILD_TYPE ?= "Release"
@@ -128,7 +128,7 @@ EXTRA_OECMAKE += "\
     -DQT_EDITION=${QT_EDITION} \
 "
 
-EXTRA_OECMAKE:append:class-target = "\
+EXTRA_OECMAKE_append_class-target = "\
     -DFEATURE_rpath=OFF \
     -DQT_QPA_DEFAULT_PLATFORM=${QT_QPA_DEFAULT_PLATFORM} \
     -DQT_AVOID_CMAKE_ARCHIVING_API=ON \
@@ -137,7 +137,7 @@ EXTRA_OECMAKE:append:class-target = "\
 
 SYSROOT_DIRS += "${QT6_INSTALL_MKSPECSDIR}"
 
-do_install:append() {
+do_install_append() {
     sed -i ${D}${libdir}/cmake/Qt6BuildInternals/QtBuildInternalsExtra.cmake \
         -e '/QT_SOURCE_TREE/,+2d'
 
@@ -149,7 +149,7 @@ do_install:append() {
     rm -f ${D}${QT6_INSTALL_MKSPECSDIR}/features/data/mac/objc_namespace.sh
 }
 
-do_install:append:class-nativesdk() {
+do_install_append_class-nativesdk() {
     install -d ${D}${datadir}/cmake/OEToolchainConfig.cmake.d
     cat > ${D}${datadir}/cmake/OEToolchainConfig.cmake.d/OEQt6Toolchain.cmake <<EOF
 set(QT_HOST_PATH "\$ENV{OECORE_NATIVE_SYSROOT}/usr" CACHE PATH "")
@@ -160,7 +160,7 @@ EOF
         -e 's|${RECIPE_SYSROOT_NATIVE}|${SDKPATHNATIVE}|'
 }
 
-INSANE_SKIP:${PN}-ptest += "arch"
+INSANE_SKIP_${PN}-ptest += "arch"
 INHIBIT_PACKAGE_STRIP_FILES = "\
     ${PKGD}${PTEST_PATH}/tests/auto/corelib/plugin/qpluginloader/elftest/corrupt2.elf64.so \
     ${PKGD}${PTEST_PATH}/tests/auto/corelib/plugin/qpluginloader/elftest/corrupt3.elf64.so \

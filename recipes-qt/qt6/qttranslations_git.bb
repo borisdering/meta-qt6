@@ -12,7 +12,7 @@ DEPENDS += "qtbase qttools qttools-native"
 
 PACKAGES = "${PN}"
 PACKAGES_DYNAMIC = "${PN}-*"
-PACKAGESPLITFUNCS:prepend = "split_translation_packages "
+PACKAGESPLITFUNCS_prepend = "split_translation_packages "
 
 python split_translation_packages () {
     do_split_packages(d, d.expand('${QT6_INSTALL_TRANSLATIONSDIR}'),

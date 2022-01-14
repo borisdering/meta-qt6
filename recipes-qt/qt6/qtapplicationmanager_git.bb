@@ -8,14 +8,14 @@ include recipes-qt/qt6/qt6-git.inc
 include recipes-qt/qt6/qt6.inc
 
 DEPENDS += "qtbase qtdeclarative libyaml libarchive qtapplicationmanager-native"
-RDEPENDS:${PN}:class-target = "libcrypto ${PN}-tools"
+RDEPENDS_${PN}_class-target = "libcrypto ${PN}-tools"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'multi-process', '', d)}"
 
 PACKAGECONFIG[tools-only] = "-DFEATURE_am_tools_only=ON, -DFEATURE_am_tools_only=OFF"
 PACKAGECONFIG[multi-process] = "-DFEATURE_am_multi_process=ON, -DFEATURE_am_multi_process=OFF, qtwayland qtwayland-native"
 
-PACKAGECONFIG:class-native ??= "tools-only"
-PACKAGECONFIG:class-nativesdk ??= "${PACKAGECONFIG:class-native}"
+PACKAGECONFIG_class-native ??= "tools-only"
+PACKAGECONFIG_class-nativesdk ??= "${PACKAGECONFIG:class-native}"
 
 BBCLASSEXTEND = "nativesdk native"

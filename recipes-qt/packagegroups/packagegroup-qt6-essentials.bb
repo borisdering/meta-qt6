@@ -7,7 +7,7 @@ inherit packagegroup
 
 PACKAGEGROUP_DISABLE_COMPLEMENTARY = "1"
 
-RDEPENDS:${PN} += " \
+RDEPENDS_${PN} += " \
     qtbase \
     qtdeclarative \
     qttools \

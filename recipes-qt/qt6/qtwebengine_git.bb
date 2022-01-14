@@ -76,11 +76,11 @@ PACKAGECONFIG[webrtc] = "-DFEATURE_webengine_webrtc=ON,-DFEATURE_webengine_webrt
 PACKAGECONFIG[webrtc-pipewire] = "-DFEATURE_webengine_webrtc_pipewire=ON,-DFEATURE_webengine_webrtc_pipewire=OFF,pipewire glib-2.0"
 PACKAGECONFIG[zlib] = "-DFEATURE_webengine_system_zlib=ON,-DFEATURE_webengine_system_zlib=OFF,zlib"
 
-FILES:${PN} += "\
+FILES_${PN} += "\
     ${QT6_INSTALL_TRANSLATIONSDIR} \
     ${QT6_INSTALL_DATADIR}/resources \
 "
 
 # QA Issue: qtwebengine: ELF binary /usr/lib/libQt6WebEngineCore.so.6.3.0 has relocations in .text [textrel]
 # when proprietary-codecs is enabled
-INSANE_SKIP:${PN} += "textrel"
+INSANE_SKIP_${PN} += "textrel"

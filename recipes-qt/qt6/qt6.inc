@@ -34,52 +34,52 @@ python __anonymous() {
 
 # Many examples come with libraries installed outside of standard libdir,
 # suppress QA check complaining
-INSANE_SKIP:${PN}-dbg += "libdir"
-INSANE_SKIP:${PN}-examples += "libdir dev-so"
+INSANE_SKIP_${PN}-dbg += "libdir"
+INSANE_SKIP_${PN}-examples += "libdir dev-so"
 
-SYSROOT_DIRS:append:mingw32 = " ${QT6_INSTALL_BINDIR}"
+SYSROOT_DIRS_append_mingw32 = " ${QT6_INSTALL_BINDIR}"
 
 PACKAGE_BEFORE_PN = "${PN}-qmlplugins ${PN}-tools ${PN}-plugins ${PN}-examples"
 
-ALLOW_EMPTY:${PN} = "1"
-ALLOW_EMPTY:${PN}-plugins = "1"
-ALLOW_EMPTY:${PN}-qmlplugins = "1"
+ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY_${PN}-plugins = "1"
+ALLOW_EMPTY_${PN}-qmlplugins = "1"
 
-RRECOMMENDS:${PN} = " \
+RRECOMMENDS_${PN} = " \
     ${PN}-plugins \
     ${PN}-qmlplugins \
 "
-RRECOMMENDS:${PN}:class-native = ""
+RRECOMMENDS_${PN}_class-native = ""
 
-RRECOMMENDS:${PN}-dev += " \
+RRECOMMENDS_${PN}-dev += " \
     ${PN}-staticdev \
 "
 
-FILES:${PN}-qmlplugins = " \
+FILES_${PN}-qmlplugins = " \
     ${QT6_INSTALL_QMLDIR} \
 "
 
-FILES:${PN}-tools = " \
+FILES_${PN}-tools = " \
     ${QT6_INSTALL_BINDIR} \
     ${QT6_INSTALL_LIBEXECDIR} \
 "
 
-FILES:${PN}-plugins = " \
+FILES_${PN}-plugins = " \
     ${QT6_INSTALL_PLUGINSDIR}/*/*${SOLIBSDEV} \
     ${QT6_INSTALL_PLUGINSDIR}/*/*/*${SOLIBSDEV} \
     ${QT6_INSTALL_PLUGINSDIR}/*/*/*/*${SOLIBSDEV} \
 "
-FILES:${PN}-plugins:mingw32 = " \
+FILES_${PN}-plugins_mingw32 = " \
     ${QT6_INSTALL_PLUGINSDIR}/*/*.dll \
     ${QT6_INSTALL_PLUGINSDIR}/*/*/*.dll \
     ${QT6_INSTALL_PLUGINSDIR}/*/*/*/*.dll \
 "
 
-FILES:${PN} += " \
+FILES_${PN} += " \
     ${QT6_INSTALL_LIBDIR}/lib*${SOLIBS} \
 "
 
-FILES:${PN}-dev += " \
+FILES_${PN}-dev += " \
     ${QT6_INSTALL_DESCRIPTIONSDIR} \
     ${QT6_INSTALL_DOCDIR} \
     ${QT6_INSTALL_INCLUDEDIR} \
@@ -95,7 +95,7 @@ FILES:${PN}-dev += " \
     ${QT6_INSTALL_QMLDIR}/*/*/*/designer \
 "
 
-FILES:${PN}-staticdev += " \
+FILES_${PN}-staticdev += " \
     ${QT6_INSTALL_LIBDIR}/*.a \
     ${QT6_INSTALL_PLUGINSDIR}/*/*.a \
     ${QT6_INSTALL_PLUGINSDIR}/*/*.prl \
@@ -117,7 +117,7 @@ FILES:${PN}-staticdev += " \
 "
 
 # Note: INSTALL_EXAMPLESDIR is not used
-FILES:${PN}-examples = " \
+FILES_${PN}-examples = " \
     ${QT6_INSTALL_EXAMPLESDIR} \
     ${prefix}/examples \
 "
