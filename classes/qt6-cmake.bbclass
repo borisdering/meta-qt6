@@ -1,6 +1,6 @@
 inherit cmake python3native perlnative qt6-paths
 
-DEPENDS:prepend = "qtbase-native "
+DEPENDS_prepend = "qtbase-native "
 
 EXTRA_OECMAKE += "\
     -DQT_CMAKE_DEBUG_EXTEND_TARGET=ON \
